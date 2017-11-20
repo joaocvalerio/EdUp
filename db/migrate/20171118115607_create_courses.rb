@@ -4,7 +4,6 @@ class CreateCourses < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :description
       t.references :company, foreign_key: true
-
       t.timestamps
     end
   end

@@ -1,5 +1,7 @@
 require "faker"
 
+puts "Cleaning DB..."
+Company.destroy_all
 puts "Seeding DB!"
 puts 'Creating companies...'
 
@@ -48,7 +50,6 @@ publishers = []
   publisher.save!
   publishers << publisher
 end
-
 
 puts 'Creating courses...'
 
