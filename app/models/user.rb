@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :courses, through: :courses_users
   has_many :published_courses, foreign_key: "user_id", class_name: "Course"
   validates :first_name, :last_name, presence: true
-
 end
 
 

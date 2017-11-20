@@ -60,9 +60,9 @@ courses = []
     name: Faker::Educator.course,
     description: Faker::Lorem.sentence(3)
   )
-company = companies.sample
-course.company = company
-course.users << publishers.sample
+publisher = publishers.sample
+course.publisher = publisher
+course.company = publisher.company
 course.save!
 courses << course
 end
@@ -76,7 +76,7 @@ students.each do |student|
   end
 end
 
-# Creating Parts and assigging them to each Course
+# Creating Parts and assigning them to each Course
 
 courses.each do |course|
   rand(1..8).times do
