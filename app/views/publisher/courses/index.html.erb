@@ -1,0 +1,10 @@
+<h1><%= current_user.company.name %> Courses</h1>
+<% @publisher_courses.each do |course| %>
+  <h2><%= course.name %></h2>
+  <p><%= course.description%></p>
+  <ol>
+  <% course.parts.each do |part| %>
+    <li><%= part.description %></li>
+  <% end %>
+  </ol>
+<% end %>
