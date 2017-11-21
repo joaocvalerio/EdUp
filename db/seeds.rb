@@ -15,40 +15,28 @@ companies = []
   companies << company
 end
 
-puts 'Creating students...'
+puts 'Creating users...'
 
-students = []
+users = []
 
-5.times do
-  student = User.new(
+10.times do
+  user = User.new(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "seed123456"
   )
   company = companies.sample
-  student.company = company
-  student.save!
-  students << student
+  user.company = company
+  user.save!
+  users << user
 end
 
 
 puts 'Creating publishers...'
 
-publishers = []
-
 2.times do
-  publisher = User.new(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    password: "seed123456",
-    publisher: true
-  )
-  company = companies.sample
-  publisher.company = company
-  publisher.save!
-  publishers << publisher
+  publisher = users.shuffle.pop.update(publisher: true)
 end
 
 puts 'Creating courses...'
@@ -60,26 +48,27 @@ courses = []
     name: Faker::Educator.course,
     description: Faker::Lorem.sentence(3)
   )
-publisher = publishers.sample
+publisher = User.where(publisher: true).sample
 course.publisher = publisher
 course.company = publisher.company
 course.save!
 courses << course
 end
 
-# Assigning courses to each Student
+# Assigning courses to each student. Publisher can also be a student (from other
+# publishers courses or is own courses)
 
-students.each do |student|
-  courses_student_not_assign = courses
+users.each do |student|
+  courses_student_is_not_assign = courses
   rand(0..courses.count).times do
-    student.courses << courses_student_not_assign.shuffle.pop
+    student.courses << courses_student_is_not_assign.shuffle.pop
   end
 end
 
 # Creating Parts and assigning them to each Course
 
 courses.each do |course|
-  rand(1..8).times do
+  rand(1..8).times dosqui
   part = Part.new(
     video: "link",
     description: Faker::Lorem.sentence(3)
