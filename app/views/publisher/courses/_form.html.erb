@@ -1,0 +1,9 @@
+<%= simple_form_for [:publisher, @course] do |f| %>
+  <%= f.input :name, label: "Course", error: "Course name is mandatory, please specify one" %>
+  <%= f.input :description, label: "Description", error: "Description is mandatory, please specify one" %>
+  <%= f.hidden_field :company_id,:value => current_user.company_id %>
+  <%= f.association :students, collection: current_user.company.users, label_method: :full_name, value_input: :id, include_hidden: false %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
+
+

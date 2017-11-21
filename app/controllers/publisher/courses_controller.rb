@@ -10,6 +10,11 @@ class Publisher::CoursesController < ApplicationController
 
   def create
     @course = current_user.published_courses.build(course_params)
+
+    params[:course][:student_ids].each do |student_id|
+      @course.students << User.find(student_id)
+    end
+
     if @course.save
       redirect_to publisher_courses_path
     else
