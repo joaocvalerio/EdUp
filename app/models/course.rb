@@ -7,3 +7,4 @@ class Course < ApplicationRecord
   validates :name, uniqueness: { scope: :company }
   validates :name, :description, presence: true
 end
+

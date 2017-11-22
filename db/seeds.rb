@@ -19,14 +19,27 @@ puts 'Creating students...'
 
 students = []
 
-10.times do
+5.times do
   student = User.new(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     password: "seed123456"
   )
-  company = companies.sample
+  company = companies.first
+  student.company = company
+  student.save!
+  students << student
+end
+
+5.times do
+  student = User.new(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "seed123456"
+  )
+  company = companies.second
   student.company = company
   student.save!
   students << student
@@ -69,9 +82,11 @@ end
 # Assigning courses to each student.
 
 students.each do |student|
-  courses_student_is_not_assign = courses
-  rand(0..courses.count).times do
-    student.courses << courses_student_is_not_assign.shuffle.pop
+  company = student.company
+  company_courses = company.courses
+  courses_student_is_not_assign = Course.where(company: company).shuffle
+  rand(0..company_courses.count).times do
+    student.courses << courses_student_is_not_assign.pop
   end
 end
 
