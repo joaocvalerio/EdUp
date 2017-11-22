@@ -1,4 +1,6 @@
+require 'set'
 class CoursesController < ApplicationController
+  before_action :set_course, only: [:edit, :update]
 
   def index
     @courses = policy_scope(Course).order(created_at: :desc)
@@ -13,12 +15,7 @@ class CoursesController < ApplicationController
     @course = current_user.published_courses.build(course_params)
     students = params[:course][:student_ids]
 
-    # publisher can create a course without students
-    if students.present?
-      students.each do |student_id|
-        @course.students << User.find(student_id)
-      end
-    end
+    assign_students_to_course(students)
 
     if @course.save
       redirect_to authenticated_root_path
@@ -28,12 +25,35 @@ class CoursesController < ApplicationController
     authorize @course
   end
 
+  def edit
+    @student_ids = @course.students
+    authorize @course
+  end
+
+  def update
+    @course.update(course_params)
+    students = params[:course][:student_ids]
+    assign_students_to_course(students)
+    redirect_to authenticated_root_path
+    authorize @course
+  end
+
   private
 
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
   def course_params
-    params.require(:course).permit(:name, :description, :company_id)
+    params.require(:course).permit(:name, :description, :company_id, student_ids: [] )
+  end
+
+  def assign_students_to_course(students)
+    if students.present?
+      students.each do |student_id|
+       @course.students.to_set << User.find(student_id)
+      end
+    end
   end
 end
-
-
 
