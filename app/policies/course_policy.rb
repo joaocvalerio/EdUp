@@ -8,6 +8,10 @@ class CoursePolicy < ApplicationPolicy
       end
     end
   end
+
+  def create?
+    user.publisher?
+  end
 end
 
 
