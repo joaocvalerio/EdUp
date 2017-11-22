@@ -12,6 +12,10 @@ class CoursePolicy < ApplicationPolicy
   def create?
     user.publisher?
   end
+
+  def update?
+    record.user_id == user.id
+  end
 end
 
 
