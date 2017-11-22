@@ -6,20 +6,26 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    authorize @course
   end
 
   def create
     @course = current_user.published_courses.build(course_params)
+    students = params[:course][:student_ids]
 
-    params[:course][:student_ids].each do |student_id|
-      @course.students << User.find(student_id)
+    # publisher can create a course without students
+    if students.present?
+      students.each do |student_id|
+        @course.students << User.find(student_id)
+      end
     end
 
     if @course.save
-      redirect_to publisher_courses_path
+      redirect_to authenticated_root_path
     else
       render :new
     end
+    authorize @course
   end
 
   private
