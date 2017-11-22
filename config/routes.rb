@@ -10,8 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :publisher  do
-    resources :courses, only: [:index, :new, :create]
-  end
-
+  get '/publisher/courses', to: 'courses#publisher_index'
 end
