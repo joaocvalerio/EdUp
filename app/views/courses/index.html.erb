@@ -8,4 +8,14 @@
     <li><%= part.description %></li>
   <% end %>
   </ol>
+  <% if policy(course).show? %>
+    <%= link_to "Show", course_path(course) %>
+  <% end %>
+  <% if policy(course).edit? %>
+    <%= link_to "Edit", edit_course_path(course) %>
+  <% end %>
+  <% if policy(course).destroy? %>
+    <%= link_to "Delete", course_path(course), method: :delete, data: { confirm:
+     "Are you sure?" } %>
+  <% end %>
 <% end %>
