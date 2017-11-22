@@ -1,6 +1,6 @@
 require 'set'
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:edit, :update]
+  before_action :set_course, only: [:edit, :update, :show]
 
   def index
     @courses = policy_scope(Course).order(created_at: :desc)
@@ -35,6 +35,10 @@ class CoursesController < ApplicationController
     students = params[:course][:student_ids]
     assign_students_to_course(students)
     redirect_to authenticated_root_path
+    authorize @course
+  end
+
+  def show
     authorize @course
   end
 

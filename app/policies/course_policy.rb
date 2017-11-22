@@ -14,6 +14,12 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def update?
+    is_user_owner?
+  end
+
+ private
+
+  def is_user_owner?
     record.user_id == user.id
   end
 end
