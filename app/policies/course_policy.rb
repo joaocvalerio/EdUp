@@ -17,6 +17,10 @@ class CoursePolicy < ApplicationPolicy
     is_user_owner?
   end
 
+  def destroy?
+    is_user_owner?
+  end
+
  private
 
   def is_user_owner?
