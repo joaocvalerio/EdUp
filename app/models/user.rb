@@ -14,6 +14,10 @@ class User < ApplicationRecord
   def full_name
     self.first_name.capitalize + " " + self.last_name
   end
+
+  def publisher?
+    publisher
+  end
 end
 
 
