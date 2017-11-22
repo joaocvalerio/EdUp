@@ -1,0 +1,9 @@
+<h1><%= @course.name%> Courses</h1>
+
+  <h2><%= @course.name %></h2>
+  <p><%= @course.description%></p>
+  <ol>
+  <% @course.parts.each do |part| %>
+    <li><%= part.description %></li>
+  <% end %>
+  </ol>
