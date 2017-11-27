@@ -33,8 +33,8 @@ class CoursesController < ApplicationController
   def update
     @course.update(course_params)
     authorize @course
-    students = params[:course][:student_ids]
-    assign_students_to_course(students)
+    students_ids = params[:course][:student_ids]
+    assign_students_to_course(students_ids)
     redirect_to course_path
   end
 
@@ -62,10 +62,13 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:name, :description, :company_id, student_ids: [] )
   end
 
-  def assign_students_to_course(students)
-    if students.present?
-      students.each do |student_id|
-       @course.students.to_set << User.find(student_id)
+  def assign_students_to_course(students_ids)
+    if students_ids.present?
+      students_ids.each do |student_id|
+        student = User.find(student_id)
+        if @course.students.to_set << User.find(student_id)
+          UserMailer.invite(student,@course).deliver_now
+        end
       end
     end
   end
