@@ -1,4 +1,7 @@
 <h1><%= current_user.company.name %> Courses</h1>
+<% if policy(Course).create? %>
+  <%= link_to "Add Course", new_course_path %>
+<% end %>
 
 <% @courses.each do |course| %>
   <h2><%= course.name %></h2>
