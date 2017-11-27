@@ -1,19 +1,26 @@
-<h1><%= @course.name%> Courses</h1>
+<h1><%= @course.name%> Course</h1>
+  <p><% if policy(@course).edit? %>
+      <%= link_to "Edit", edit_course_path(@course) %>
+  <% end %>
 
-  <h2><%= @course.name %></h2>
+  <% if policy(@course).destroy? %>
+      <%= link_to "Delete", course_path(@course), method: :delete, data: { confirm:
+       "Are you sure?" } %>
+  <% end %>
+  </p>
+
   <p><%= @course.description%></p>
   <ol>
+    <% byebug %>
   <% @course.parts.each do |part| %>
-    <li><%= part.description %></li>
+    <li>
+      <%= part.description %>
+      <% if policy(part).edit? && policy(part).destroy? %>
+         <%= link_to "Edit", edit_course_part_path(@course, part ) %>
+        <%= link_to "Delete", course_part_path(@course, part), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </li>
   <% end %>
   </ol>
 
-<% if policy(@course).edit? %>
-    <%= link_to "Edit", edit_course_path(@course) %>
-<% end %>
-
-<% if policy(@course).destroy? %>
-    <%= link_to "Delete", course_path(@course), method: :delete, data: { confirm:
-     "Are you sure?" } %>
-<% end %>
 

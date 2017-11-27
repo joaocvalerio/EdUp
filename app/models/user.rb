@@ -7,7 +7,7 @@ class User < ApplicationRecord
   belongs_to :company
   has_many :courses_users, dependent: :destroy
   has_many :courses, through: :courses_users
-  has_many :published_courses, foreign_key: "user_id", class_name: "Course"
+  has_many :created_courses, foreign_key: "user_id", class_name: "Course"
   validates :first_name, :last_name, presence: true
 
 

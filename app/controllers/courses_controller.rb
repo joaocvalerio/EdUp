@@ -1,6 +1,7 @@
 require 'set'
 class CoursesController < ApplicationController
   before_action :set_course, only: [:edit, :update, :show, :destroy]
+  before_action :set_part, only: [:create, :show, :edit]
 
   def index
     @courses = policy_scope(Course).order(created_at: :desc)
@@ -12,17 +13,16 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = current_user.published_courses.build(course_params)
-    students = params[:course][:student_ids]
+    @course = current_user.created_courses.build(course_params)
 
-    assign_students_to_course(students)
+    authorize @course
 
-    if @course.save
-      redirect_to authenticated_root_path
+    if @course.save!
+      redirect_to edit_course_path(@course)
+      flash[:notice] = "Course created!"
     else
       render :new
     end
-    authorize @course
   end
 
   def edit
@@ -32,10 +32,10 @@ class CoursesController < ApplicationController
 
   def update
     @course.update(course_params)
+    authorize @course
     students = params[:course][:student_ids]
     assign_students_to_course(students)
     redirect_to course_path
-    authorize @course
   end
 
   def show
@@ -52,6 +52,10 @@ class CoursesController < ApplicationController
 
   def set_course
     @course = Course.find(params[:id])
+  end
+
+  def set_part
+    @part = Part.new
   end
 
   def course_params

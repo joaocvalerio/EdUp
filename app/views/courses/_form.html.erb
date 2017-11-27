@@ -1,9 +1,25 @@
 <%= simple_form_for [@course] do |f| %>
-
   <%= f.input :name, label: "Course" %>
   <%= f.input :description, label: "Description" %>
   <%= f.hidden_field :company_id,:value => current_user.company_id %>
-  <%= f.association :students, collection: current_user.company.users, label_method: :full_name, value_input: :id, include_hidden: false, collection_selected: @course.students %>
-  <%= f.button :submit, class: "btn btn-primary" %>
+  <% if current_page?(new_course_path) %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
+  <% unless current_page?(new_course_path) %>
+    <%= f.association :parts, collection: @course.parts, label_method: :description, value_input: :id, include_hidden: false, collection_selected: @course.parts %>
+    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+      Add Part
+    </button>
+    <%= f.association :students, collection: current_user.company.users, label_method: :full_name, value_input: :id, include_hidden: false, collection_selected: @course.students %>
+    <%= f.hidden_field :company_id,:value => current_user.company_id %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
 <% end %>
+
+<% unless current_page?(new_course_path) %>
+  <%= render "add_part_to_course.html.erb" %>
+<% end %>
+
+
+
 
