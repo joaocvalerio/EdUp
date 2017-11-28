@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'faker'
 gem 'pundit'
+gem 'simple_token_authentication'
 
 group :development, :test do
   gem "letter_opener"

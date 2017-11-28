@@ -66,8 +66,9 @@ class CoursesController < ApplicationController
     if students_ids.present?
       students_ids.each do |student_id|
         student = User.find(student_id)
+        student.save! # for getting a token
         if @course.students.to_set << User.find(student_id)
-          UserMailer.invite(student,@course).deliver_now
+          UserMailer.invite(student, @course).deliver_now
         end
       end
     end
