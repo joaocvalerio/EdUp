@@ -22,6 +22,11 @@ class Api::V1::CoursesController < Api::V1::BaseController
   def show
   end
 
+  def destroy
+    @course.destroy
+    head :no_content
+  end
+
   private
 
   def set_course
@@ -47,26 +52,3 @@ end
 
 
 
-# def create
-#     @restaurant = Restaurant.new(restaurant_params)
-#     @restaurant.user = current_user
-#     authorize @restaurant
-#     if @restaurant.save
-#       render :show, status: :created
-#     else
-#       render_error
-#     end
-
-
-#  def create
-#     @course = current_user.created_courses.build(course_params)
-
-#     authorize @course
-
-#     if @course.save!
-#       redirect_to edit_course_path(@course)
-#       flash[:notice] = "Course created!"
-#     else
-#       render :new
-#     end
-#   end
