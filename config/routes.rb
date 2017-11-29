@@ -13,7 +13,7 @@ Rails.application.routes.draw do
    namespace :api, defaults: { format: :json } do
     namespace :v1 do
       root:to => 'courses#index'
-      resources :courses, only: [ :create, :show, :destroy ]
+      resources :courses, only: [ :create, :show, :update, :destroy ]
     end
   end
 end

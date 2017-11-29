@@ -7,7 +7,6 @@ class Api::V1::CoursesController < Api::V1::BaseController
   end
 
   def create
-    byebug
     @course = Course.new(course_params)
     @course.publisher = current_user
     @course.company = current_user.company
@@ -19,8 +18,17 @@ class Api::V1::CoursesController < Api::V1::BaseController
     end
   end
 
+  def update
+    if @course.update(course_params)
+      render :show
+    else
+      render_error
+    end
+  end
+
   def show
   end
+
 
   def destroy
     @course.destroy
