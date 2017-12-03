@@ -13,7 +13,10 @@ Rails.application.routes.draw do
    namespace :api, defaults: { format: :json } do
     namespace :v1 do
       root:to => 'courses#index'
-      resources :courses, only: [ :create, :show, :update, :destroy ]
+      get '/company_users', to: 'courses#company_users_index'
+      resources :courses, except: [:index, :new, :edit, :company_users] do
+        resources :parts, except: [:index, :new, :edit]
+      end
     end
   end
 end

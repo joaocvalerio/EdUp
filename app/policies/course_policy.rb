@@ -21,6 +21,10 @@ class CoursePolicy < ApplicationPolicy
     is_user_owner?
   end
 
+  def company_users_index?
+    true
+  end
+
  private
 
   def is_user_owner?

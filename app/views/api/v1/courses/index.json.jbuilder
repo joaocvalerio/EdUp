@@ -4,4 +4,4 @@ json.courses do
     json.publisher course.publisher.full_name
   end
 end
-7
+

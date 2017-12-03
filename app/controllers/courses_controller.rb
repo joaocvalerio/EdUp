@@ -66,11 +66,12 @@ class CoursesController < ApplicationController
     if students_ids.present?
       students_ids.each do |student_id|
         student = User.find(student_id)
-        if @course.students.to_set << User.find(student_id)
+        if @course.students.to_set << student # this way there is no validation error (user has been already taken)
           UserMailer.invite(student, @course).deliver_now
         end
       end
     end
   end
+
 end
 
