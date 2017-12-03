@@ -19,6 +19,7 @@ class User < ApplicationRecord
   def publisher?
     publisher
   end
+
 end
 
 
