@@ -29,10 +29,6 @@ class Api::V1::CoursesController < Api::V1::BaseController
   end
 
   def update
-    students = params[:course][:students]
-    assign_students_to_course(students)
-    # parts = params[:course][:parts]
-    # assign_parts_to_course(parts)
     if @course.update(course_params)
       render :show
     else
@@ -61,26 +57,5 @@ class Api::V1::CoursesController < Api::V1::BaseController
       status: :unprocessable_entity
   end
 
-  def assign_students_to_course(students)
-    if students.present?
-      @course.students.clear
-      students.each do |student|
-        student_email = student[:email]
-        if User.exists?(email: student_email)
-          student = User.where(email: student_email )
-          @course.students << student
-        end
-      end
-    end
-  end
-
 end
-
-
-
-
-
-
-
-
 

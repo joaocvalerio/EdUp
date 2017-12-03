@@ -14,8 +14,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       root:to => 'courses#index'
       get '/company_users', to: 'courses#company_users_index'
-      resources :courses, except: [:index, :new, :edit, :company_users] do
+      resources :courses, except: [:index, :new, :edit] do
         resources :parts, except: [:index, :new, :edit]
+        post '/add_students', to: 'students#add_students'
+        get '/remove_student/:id', to: 'students#remove_student'
       end
     end
   end
