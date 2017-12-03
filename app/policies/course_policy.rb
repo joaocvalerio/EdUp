@@ -25,6 +25,14 @@ class CoursePolicy < ApplicationPolicy
     true
   end
 
+  def add_students?
+    record.user_id == user.id
+  end
+
+  def remove_student?
+    is_user_owner?
+  end
+
  private
 
   def is_user_owner?

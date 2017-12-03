@@ -21,7 +21,6 @@ class PartPolicy < ApplicationPolicy
     is_user_owner?
   end
 
-
   private
 
   def is_user_owner?
