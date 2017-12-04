@@ -48,6 +48,21 @@ class CoursesController < ApplicationController
     redirect_to authenticated_root_path
   end
 
+  def course_students
+    @course = Course.find(params[:course_id])
+    @students = @course.students
+    authorize @course
+  end
+
+  def track_clicks
+    student = User.where(email: params[:user_email]).first
+    @course = Course.find(params[:course])
+    courses_users = CoursesUser.where(user_id: student.id, course_id: @course.id).first
+    courses_users.update(state: "clicked")
+    redirect_to course_path(@course)
+    authorize @course
+  end
+
   private
 
   def set_course

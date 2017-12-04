@@ -2,7 +2,8 @@
 
 <p>You where invited to join to the <%=@course.name %> course!. You can log in with the following link:</p>
 
-<%= link_to "Go to #{@course.name}", course_url(@course, user_email: @user.email, user_token: @user.authentication_token)  %>
+<%= link_to "Go to #{@course.name}", track_clicks_url(course: @course, user_email: @user.email, user_token: @user.authentication_token)  %>
+
 <p>Hope you enjoy it!</p>
 
 <p>Cheers,</p>
