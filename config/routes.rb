@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     root :to => 'courses#index', as: :authenticated_root
+    get 'track_clicks', to: 'courses#track_clicks'
     resources :courses, except: :index do
+      get 'students', to: 'courses#course_students'
       resources :parts, except: :index
     end
 

@@ -1,0 +1,16 @@
+  <table style="width: 100%">
+    <tr>
+      <th>Id</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>State</th>
+    </tr>
+<% @students.each do |student|%>
+    <tr>
+      <td><%= student.id%></td>
+      <td><%= student.full_name %></td>
+      <td><%= student.email%></td>
+      <td><%= state(@course, student)%> on email link</td>
+    </tr>
+<% end %>
+  </table>

@@ -21,15 +21,23 @@ class CoursePolicy < ApplicationPolicy
     is_user_owner?
   end
 
+  def track_clicks?
+    true
+  end
+
   def company_users_index?
     true
   end
 
   def add_students?
-    record.user_id == user.id
+    is_user_owner?
   end
 
   def remove_student?
+    is_user_owner?
+  end
+
+  def course_students?
     is_user_owner?
   end
 
