@@ -1,25 +1,36 @@
-<h1><%= @course.name%> Course</h1>
-  <p><% if policy(@course).edit? %>
+<div>
+  <div>
+    <h1><%= @course.name%> Course</h1>
+     <p><%= @course.description%></p>
+    <p>
+      <% if policy(@course).course_students? %>
+      <%= link_to "Students", course_students_path(@course) %>
+      <% end %>
+      <% if policy(@course).edit? %>
       <%= link_to "Edit", edit_course_path(@course) %>
-  <% end %>
-
-  <% if policy(@course).destroy? %>
+      <% end %>
+      <% if policy(@course).destroy? %>
       <%= link_to "Delete", course_path(@course), method: :delete, data: { confirm:
        "Are you sure?" } %>
-  <% end %>
-  </p>
-
-  <p><%= @course.description%></p>
-  <ol>
-  <% @course.parts.each do |part| %>
-    <li>
-      <%= part.description %>
-      <% if policy(part).edit? && policy(part).destroy? %>
-         <%= link_to "Edit", edit_course_part_path(@course, part ) %>
-        <%= link_to "Delete", course_part_path(@course, part), method: :delete, data: { confirm: "Are you sure?" } %>
-      <% end %>
-    </li>
-  <% end %>
-  </ol>
-
-
+       <% end %>
+     </p>
+     <ol>
+      <% @course.parts.each do |part| %>
+      <div>
+        <li>
+          <%= part.description %>
+          <% if policy(part).edit? && policy(part).destroy? %>
+          <%= link_to "Edit", edit_course_part_path(@course, part ) %>
+          <%= link_to "Delete", course_part_path(@course, part), method: :delete, data: { confirm: "Are you sure?" } %>
+          <% end %>
+        </li>
+        <div>
+          <iframe  allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/<%= part.video %>">
+            <p>Your browser does not support iframes.</p>
+          </iframe>
+        </div>
+        <% end %>
+      </div>
+    </ol>
+  </div>
+</div>
