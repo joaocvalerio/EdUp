@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyString
+griffincourse:
+  name: "Griffin Course"
+  description: "Learn how to be a jerk with P.G."
   company: one
+  publisher: peter
 
-two:
-  name: MyString
-  description: MyString
-  company: two
+rubyonrails:
+  name: "Ruby on Rails"
+  description: "Learn Ruby on Rails in 1 day"
+  company: one
+  publisher: peter
