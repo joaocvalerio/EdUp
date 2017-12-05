@@ -3,6 +3,7 @@
     <h1><%= @course.name%> Course</h1>
      <p><%= @course.description%></p>
     <p>
+      <%= link_to "Courses", authenticated_root_path %>
       <% if policy(@course).course_students? %>
       <%= link_to "Students", course_students_path(@course) %>
       <% end %>
