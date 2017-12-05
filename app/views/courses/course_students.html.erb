@@ -10,7 +10,7 @@
       <td><%= student.id%></td>
       <td><%= student.full_name %></td>
       <td><%= student.email%></td>
-      <td><%= state(@course, student)%> on email link</td>
+      <td><%= student.state(@course)%> on email link</td>
     </tr>
 <% end %>
   </table>
