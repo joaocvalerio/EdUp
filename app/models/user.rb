@@ -20,6 +20,10 @@ class User < ApplicationRecord
     publisher
   end
 
+  def state(course)
+    CoursesUser.where(user_id: self.id, course_id: course.id).first.state
+  end
+
 end
 
 
