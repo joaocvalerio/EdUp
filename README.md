@@ -17,9 +17,7 @@ A Publisher can only invite Students who own a company email (emails that exist 
 
 Only EdUp can assign a user as a Publisher.
 
-
 ----------
-
 
 **How To Use**
 ---------------
@@ -31,13 +29,12 @@ To clone and run this application, you'll need Git installed on your computer. F
  cd Edup
 ```
 
-####Install dependencies
-
+#### Install dependencies
 ```
  bundle install
 ```
 
-####Create db, migrate schema, seed db
+#### Create db, migrate schema, seed db
 
 ```
  rails db:create
@@ -54,13 +51,13 @@ To clone and run this application, you'll need Git installed on your computer. F
 
  To sign in as:
 
-   Publisher:
+   Publisher
    ```
    email: joaocvalerio@gmail.com
    password: 1234567
    ```
 
-   Student:
+   Student
    ```
    email: mrrobot@crazyhacker.com
    password: 1234567
@@ -81,8 +78,8 @@ rails test:system
 **API**
 ---------------
 
-##Authentication
-###Method 1: Query Params
+## Authentication
+### Method 1: Query Params
 
 You can authenticate passing the user_email and user_token params as query params:
 
@@ -93,20 +90,20 @@ GET http://localhost:3000/api/v1/?user_email=EMAIL&user_token=TOKEN
 ```
 To authenticate as:
 
-Publisher:
+Publisher
 ```
 EMAIL: joaocvalerio@gmail.com
 TOKEN: ue-xRA-oGfPxEpu1TfYB
 ```
 
-Student:
+Student
 ```
 EMAIL: mrrobot@crazyhacker.com
 TOKEN: QY2L1zrfx98PquNLQ4_C
 ```
 
 
-###Method 2: Request Headers
+### Method 2: Request Headers
 
 You can also use request headers:
 
@@ -123,11 +120,11 @@ X-User-Email mrrobot@crazyhacker.com
 X-User-Token QY2L1zrfx98PquNLQ4_C
 ```
 
-##**Examples**
+## **Examples**
 
-###List courses
+### List courses
 
-####Request
+#### Request
 ```
 GET http://localhost:3000/api/v1/
 ```
@@ -153,12 +150,12 @@ GET http://localhost:3000/api/v1/
     ]
 }
 ```
-###Show Course
-####Request
+### Show Course
+#### Request
 ```
 GET http://localhost:3000/api/v1/courses/1
 ```
-####Response
+#### Response
 ```
 
 {
@@ -204,8 +201,8 @@ GET http://localhost:3000/api/v1/courses/1
         ]
     }
 ```
-###Create a Course
-####Request
+### Create a Course
+####  Request
 
 
 ```
@@ -219,7 +216,7 @@ POST http://localhost:3000/api/v1/courses/
     }
 }
 ```
-####Response
+#### Response
 ```
 {
     "course": {
@@ -231,8 +228,8 @@ POST http://localhost:3000/api/v1/courses/
     }
 }
 ```
-###Update a Course
-####Request
+### Update a Course
+#### Request
 
 
 ```
@@ -246,7 +243,7 @@ PATCH  http://localhost:3000/api/v1/courses/44
     }
 }
 ```
-####Response
+#### Response
 ```
 {
     "course": {
@@ -256,15 +253,15 @@ PATCH  http://localhost:3000/api/v1/courses/44
     }
 }
 ```
-###Destroy a Course
-####Request
+### Destroy a Course
+#### Request
 
 
 ```
 DELETE  http://localhost:3000/api/v1/courses/44
 ```
-###Add Part to Course
-####Request
+### Add Part to Course
+#### Request
 
 
 ```
@@ -279,7 +276,7 @@ POST  http://localhost:3000/api/v1/courses/44/parts
   }
 }
 ```
-####Response
+#### Response
 ```
 {
     "part": {
@@ -290,15 +287,15 @@ POST  http://localhost:3000/api/v1/courses/44/parts
     }
 }
 ```
-###Show Part
-####Request
+### Show Part
+#### Request
 
 
 ```
 GET  http://localhost:3000/api/v1/courses/44/parts/1
 ```
 
-####Response
+#### Response
 ```
 {
     "part": {
@@ -309,8 +306,8 @@ GET  http://localhost:3000/api/v1/courses/44/parts/1
     }
 }
 ```
-###Update a Part
-####Request
+### Update a Part
+#### Request
 
 
 ```
@@ -324,7 +321,7 @@ PATCH  http://localhost:3000/api/v1/courses/44/parts/1
   }
 }
 ```
-####Response
+#### Response
 ```
 {
     "part": {
@@ -335,8 +332,8 @@ PATCH  http://localhost:3000/api/v1/courses/44/parts/1
     }
 }
 ```
-###Destroy a Part
-####Request
+### Destroy a Part
+#### Request
 
 
 ```
@@ -344,14 +341,14 @@ DELETE  http://localhost:3000/api/v1/courses/44/part/1
 ```
 
 
-###List company employees
-####Request
+### List company employees
+#### Request
 
 
 ```
 GET http://localhost:3000/api/v1/company_users
 ```
-####Response
+#### Response
 ```
 {
     "company_users": [
@@ -378,8 +375,8 @@ GET http://localhost:3000/api/v1/company_users
 ```
 
 > **Note:**  This is the list of users  that can be invited to courses
-###Invite students to course
-####Request
+### Invite students to course
+#### Request
 
 
 ```
@@ -400,7 +397,7 @@ POST  http://localhost:3000/api/v1/courses/44/add_students
 }
 
 ```
-####Response
+#### Response
 ```
 {
     "students": [
@@ -420,8 +417,8 @@ POST  http://localhost:3000/api/v1/courses/44/add_students
 }
 ```
 
-###Remove Student From Course
-####Request
+### Remove Student From Course
+#### Request
 
 
 ```
