@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
 
   def full_name
-    "#{full_name.capitalize} #{last_name.capitalize}"
+    first_name.capitalize + " " + last_name.capitalize
   end
 
   def publisher?

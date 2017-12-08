@@ -37,7 +37,7 @@ class PartsController < ApplicationController
   private
 
   def part_params
-      params.require(:part).permit(:description, :video, :course_id)
+    params.require(:part).permit(:description, :video, :course_id)
   end
 
   def set_part
