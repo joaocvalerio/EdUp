@@ -1,7 +1,7 @@
 require 'set'
 class CoursesController < ApplicationController
   before_action :set_course, only: [:edit, :update, :show, :destroy]
-  before_action :set_part, only: [:create, :show, :edit]
+  before_action :set_part, only: [:show, :edit]
 
   def index
     @courses = policy_scope(Course).order(created_at: :desc)
@@ -81,7 +81,7 @@ class CoursesController < ApplicationController
     if students_ids.present?
       students_ids.each do |student_id|
         student = User.find(student_id)
-        if @course.students.to_set << student # this way there is no validation error (user has been already taken)
+        if @course.students.to_set << student # this way there is no validation error if user already belongs to course (user has been already taken)
           UserMailer.invite(student, @course).deliver_now
         end
       end

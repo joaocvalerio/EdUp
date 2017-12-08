@@ -4,6 +4,7 @@ class Api::V1::StudentsController < Api::V1::BaseController
 
 
   def add_students
+    byebug
     students_email = params[:students][:emails]
     assign_students_to_course(students_email)
 

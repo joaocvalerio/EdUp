@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  course: one
+griffincourse_stewie:
+  user: stewie
+  course: griffincourse
 
-two:
-  user: two
-  course: two
+rubyonrails_stewie:
+  user: stewie
+  course: rubyonrails
+

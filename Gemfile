@@ -16,15 +16,22 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'faker'
 gem 'pundit'
 gem 'simple_token_authentication'
+gem 'faker'
+
+group :development do
+  gem 'web-console', '>= 3.3.0'
+end
 
 group :development, :test do
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'launchy'
   gem "letter_opener"
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
